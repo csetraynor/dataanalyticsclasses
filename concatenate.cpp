@@ -1,0 +1,38 @@
+#include <Rcpp.h>
+using namespace Rcpp;
+
+// This is a simple example of exporting a C++ function to R. You can
+// source this function into an R session using the Rcpp::sourceCpp 
+// function (or via the Source button on the editor toolbar). Learn
+// more about Rcpp at:
+//
+//   http://www.rcpp.org/
+//   http://adv-r.had.co.nz/Rcpp.html
+//   http://gallery.rcpp.org/
+//
+
+// [[Rcpp::export]]
+NumericVector rcpp_concatenate(NumericVector x, NumericVector y) {
+  int nx = x.length();
+  int ny = y.length();
+  NumericVector out(nx + ny);
+  int i;
+  
+  for(i = 0; i < nx; ++i){
+    out[i] = x[i];
+  }
+  for(i = 0; i < ny; ++i){
+    out[i+nx] = y[i];
+  }
+  return out;
+}
+
+
+// You can include R code blocks in C++ files processed with sourceCpp
+// (useful for testing and development). The R code will be automatically 
+// run after the compilation.
+//
+
+/*** R
+rcpp_concatenate(1:4, 1:10)
+*/
